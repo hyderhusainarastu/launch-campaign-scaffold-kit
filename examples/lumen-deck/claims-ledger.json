@@ -1,0 +1,75 @@
+{
+  "$comment": "FICTIONAL EXAMPLE. Invented campaign, invented evidence paths, invented reviewer initials.",
+  "schemaVersion": "1.0",
+  "campaign": "lumen-deck",
+  "manifestRevision": "r7",
+  "publicationDefault": "blocked",
+  "claims": [
+    {
+      "id": "lumen-deck-001",
+      "statement": "One 54-card deck, four complete games.",
+      "kind": "capability",
+      "state": "cleared",
+      "evidence": "Four rulebooks at 03_longform/drafts/rulebook-{ember,tide,quarry,solitary}.md, each complete and each playtested to a finish in the session logs at qa/reports/playtest-log.md.",
+      "block": null,
+      "clearedBy": "RM",
+      "appearsIn": ["04_funding_page/page/headline.md", "02_social/captions/teaser-01.md"],
+      "reviewAfter": "Any change to the number of shipped rulebooks"
+    },
+    {
+      "id": "lumen-deck-002",
+      "statement": "The suits are readable without colour discrimination.",
+      "kind": "capability",
+      "state": "cleared",
+      "evidence": "Shape and notch coding shown in 01_brand/exports/suit-system.svg; greyscale proof sheet at qa/exports/suit-greyscale.png.",
+      "block": null,
+      "clearedBy": "RM",
+      "appearsIn": ["04_funding_page/page/accessibility.md"],
+      "reviewAfter": null
+    },
+    {
+      "id": "lumen-deck-003",
+      "statement": "Backed decks ship within six months of the campaign closing.",
+      "kind": "timeline",
+      "state": "blocked",
+      "evidence": null,
+      "block": "The printer's lead time is a verbal estimate; no written quote is archived under sources/.",
+      "clearedBy": null,
+      "appearsIn": ["04_funding_page/page/risks.md", "05_launch_plan/email/day-01.md"],
+      "reviewAfter": "Written printer quote received"
+    },
+    {
+      "id": "lumen-deck-004",
+      "statement": "Playtested by more than two hundred people.",
+      "kind": "quantity",
+      "state": "blocked",
+      "evidence": "Session logs at qa/reports/playtest-log.md count 84 named participants across 19 sessions.",
+      "block": "The count in the evidence does not support the number in the statement. Rewrite the statement to the figure the logs actually carry.",
+      "clearedBy": null,
+      "appearsIn": ["02_social/captions/teaser-03.md"],
+      "reviewAfter": null
+    },
+    {
+      "id": "lumen-deck-005",
+      "statement": "Recommended by the Fernwood Games Circle.",
+      "kind": "endorsement",
+      "state": "retired",
+      "evidence": null,
+      "block": "The group gave informal positive feedback in a session but declined to be quoted. Statement withdrawn; do not reinstate without written permission in sources/permissions/.",
+      "clearedBy": null,
+      "appearsIn": [],
+      "reviewAfter": null
+    },
+    {
+      "id": "lumen-deck-006",
+      "statement": "Card stock is 310gsm with a black core.",
+      "kind": "quantity",
+      "state": "cleared",
+      "evidence": "Printer specification sheet archived at sources/references/stock-spec.pdf; matches the sample deck logged in qa/reports/sample-inspection.md.",
+      "block": null,
+      "clearedBy": "TB",
+      "appearsIn": ["04_funding_page/page/specifications.md"],
+      "reviewAfter": "Any change of printer"
+    }
+  ]
+}

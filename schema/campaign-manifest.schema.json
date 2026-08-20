@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schemas/campaign-manifest.schema.json",
+  "title": "Launch campaign manifest",
+  "description": "One canonical description of a launch: what is being launched, on what terms, and whether it is cleared to go out. Every other file in the scaffold quotes this file rather than restating it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifestVersion",
+    "revision",
+    "campaign",
+    "offering",
+    "tiers",
+    "budget",
+    "attribution",
+    "publication"
+  ],
+  "properties": {
+    "manifestVersion": {
+      "description": "Version of this schema the instance targets.",
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+$"
+    },
+    "revision": {
+      "description": "Opaque revision label for the manifest itself. Bump on every edit so ledgers and crosswalks can pin the revision they were checked against.",
+      "type": "string",
+      "minLength": 1
+    },
+    "campaign": {
+      "description": "Public-facing framing of the launch.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["slug", "displayName", "headline", "publicStatus", "target", "durationDays"],
+      "properties": {
+        "slug": {
+          "description": "Lowercase identifier used in filenames and ledger row prefixes.",
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "displayName": { "type": "string", "minLength": 1 },
+        "headline": { "type": "string", "minLength": 1 },
+        "subhead": { "type": "string" },
+        "publicStatus": {
+          "description": "What the audience is told the work actually is right now. Keep this honest; most claim disputes trace back to a status that drifted ahead of reality.",
+          "type": "string",
+          "enum": ["concept", "prototype", "in-development", "pre-order", "shipping"]
+        },
+        "target": {
+          "description": "Funding or commitment target, expressed in minor currency units to avoid float drift.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["currency", "amountMinorUnits"],
+          "properties": {
+            "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+            "amountMinorUnits": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "durationDays": { "type": "integer", "minimum": 1, "maximum": 120 },
+        "channels": {
+          "description": "Surfaces this campaign will publish to. Names are free-form so the kit does not hard-code any platform.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    },
+    "offering": {
+      "description": "What is actually being sold or funded, and how finished it is.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "stageStatus", "capabilities"],
+      "properties": {
+        "stage": {
+          "description": "Free-form label for where the work sits in your own roadmap.",
+          "type": "string",
+          "minLength": 1
+        },
+        "stageStatus": {
+          "type": "string",
+          "enum": ["planned", "in-progress", "feature-complete", "released"]
+        },
+        "capabilities": {
+          "description": "Concrete things the offering does today. Anything aspirational belongs in roadmap, not here.",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "summary", "demonstrable"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+              "summary": { "type": "string", "minLength": 1 },
+              "demonstrable": {
+                "description": "True only if you can show this working on request. Undemonstrable capabilities cannot back a public claim.",
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "roadmap": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "summary"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+              "summary": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "tiers": {
+      "description": "Pledge, pre-order, or commitment tiers. Ordered cheapest first by convention; the schema does not enforce ordering.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "priceMinorUnits", "includes", "fulfilment"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "label": { "type": "string", "minLength": 1 },
+          "priceMinorUnits": { "type": "integer", "minimum": 0 },
+          "includes": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "limit": {
+            "description": "Maximum number available, or null for unlimited.",
+            "type": ["integer", "null"],
+            "minimum": 1
+          },
+          "fulfilment": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "estimateWeeksAfterClose"],
+            "properties": {
+              "kind": { "type": "string", "enum": ["digital", "physical", "service", "mixed"] },
+              "estimateWeeksAfterClose": { "type": "integer", "minimum": 0 },
+              "shipsInternationally": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "budget": {
+      "description": "Fee model used when converting gross commitments into usable funds. Rates are fractions, not percentages.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["currency", "platformFeeRate", "paymentFeeRate"],
+      "properties": {
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "platformFeeRate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "paymentFeeRate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "fulfilmentReservePct": {
+          "description": "Share of net funds ring-fenced for making and shipping the thing.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "allocations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label", "sharePct"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+              "label": { "type": "string", "minLength": 1 },
+              "sharePct": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        }
+      }
+    },
+    "attribution": {
+      "description": "How people and tools behind the campaign may be described in public material. Prohibitions are enforced by review, not by this file, but writing them down makes the review mechanical.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["treatment", "prohibitions"],
+      "properties": {
+        "treatment": {
+          "type": "string",
+          "enum": ["named", "team-only", "pseudonymous", "unattributed"]
+        },
+        "prohibitions": {
+          "description": "Phrases, credentials, or endorsements that must never appear in campaign material.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "toolDisclosure": {
+          "description": "Whether production tooling used to make campaign assets is disclosed to the audience, and where.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required"],
+          "properties": {
+            "required": { "type": "boolean" },
+            "location": { "type": "string" }
+          }
+        }
+      }
+    },
+    "publication": {
+      "description": "The kill switch. Nothing ships while these read false.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "postingAuthorized", "publicLaunchAuthorized", "ledgers"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["draft", "internal-review", "staged", "live"]
+        },
+        "postingAuthorized": {
+          "description": "May individual assets be posted to channels yet?",
+          "type": "boolean"
+        },
+        "publicLaunchAuthorized": {
+          "description": "May the campaign itself open to the public yet?",
+          "type": "boolean"
+        },
+        "ledgers": {
+          "description": "Paths, relative to the campaign root, of the default-deny ledgers that gate this manifest.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["claims", "rights"],
+          "properties": {
+            "claims": { "type": "string", "minLength": 1 },
+            "rights": { "type": "string", "minLength": 1 }
+          }
+        },
+        "blockers": {
+          "description": "Open reasons the launch is not authorized. Empty array is the only state compatible with publicLaunchAuthorized: true.",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Local secrets and configuration — never commit these
+.env
+.env.*
+*.pem
+*.key
+
+# Scratch and working files (root-anchored, so a campaign's own
+# 03_longform/drafts/ directory is still tracked)
+/scratch/
+/drafts/
+/tmp/
+*.tmp
+*.bak
+
+# Generated manifests from local runs
+*.archive-manifest.json
+
+# Editable masters and heavy media are usually kept out of git and stored
+# alongside the repo instead. Uncomment the lines that apply to your setup.
+# **/source/
+# **/*.mp4
+# **/*.mov
+# **/*.wav
+# **/*.psd
+# **/*.ai

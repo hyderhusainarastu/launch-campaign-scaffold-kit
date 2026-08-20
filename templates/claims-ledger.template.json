@@ -1,0 +1,38 @@
+{
+  "$comment": "Claims ledger template. Copy to <campaign>/07_governance/claims-ledger.json and replace every value. A claim is any factual assertion made to an audience: a number, a capability, a comparison, a timeline, an endorsement. Default deny: a claim that has no row here, or whose row is not state=cleared, may not appear in published material.",
+  "schemaVersion": "1.0",
+  "campaign": "REPLACE-WITH-CAMPAIGN-SLUG",
+  "manifestRevision": "REPLACE-WITH-THE-MANIFEST-REVISION-THIS-WAS-CHECKED-AGAINST",
+  "publicationDefault": "blocked",
+  "columns": {
+    "id": "Stable identifier, prefixed by campaign slug. Never reused after retirement; assets and crosswalk rows point at it.",
+    "statement": "The claim written exactly as it will appear, or as close as the medium allows. Paraphrases hide drift.",
+    "kind": "One of: capability, quantity, comparison, timeline, endorsement, provenance, legal.",
+    "state": "One of: blocked, cleared, retired. Anything other than cleared means do not publish. New rows start blocked.",
+    "evidence": "Where the backing lives — a file path inside the campaign, a measurement, a signed permission. Free text, but must be checkable by someone who is not you.",
+    "block": "Why it is blocked, in one sentence, or null once cleared. A cleared row with a non-null block is a schema error.",
+    "clearedBy": "Role or initials of whoever cleared it, or null. Self-clearing is allowed for solo projects but should still be recorded.",
+    "appearsIn": "Asset ids or file paths where the claim is used. Lets you find every surface to fix when a claim is later retracted.",
+    "reviewAfter": "Optional trigger for re-review — a milestone name, a version, or a condition. Not a calendar date, so it does not rot."
+  },
+  "rules": [
+    "Default deny. Absence of a row is a block, not an omission.",
+    "One statement per row. If a sentence makes two claims, split it into two rows.",
+    "Clearing a row requires evidence that a stranger could verify without asking you a question.",
+    "Softening a claim is an edit, not a clearance. Rewrite the statement and reset state to blocked.",
+    "Retired rows stay in the file. Deleting history is how the same bad claim comes back."
+  ],
+  "claims": [
+    {
+      "id": "REPLACE-slug-001",
+      "statement": "REPLACE with the exact sentence you intend to publish.",
+      "kind": "capability",
+      "state": "blocked",
+      "evidence": null,
+      "block": "New row; no evidence attached yet.",
+      "clearedBy": null,
+      "appearsIn": [],
+      "reviewAfter": null
+    }
+  ]
+}

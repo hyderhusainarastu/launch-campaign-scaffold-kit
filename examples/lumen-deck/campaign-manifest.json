@@ -1,0 +1,147 @@
+{
+  "$comment": "FICTIONAL EXAMPLE. Lumen Deck is an invented tabletop game and Harrow & Vine is an invented studio. Every number, name, and rate below was made up to demonstrate the schema. Do not treat any of it as guidance on pricing or fee structures.",
+  "manifestVersion": "1.0",
+  "revision": "r7",
+  "campaign": {
+    "slug": "lumen-deck",
+    "displayName": "Lumen Deck",
+    "headline": "A 54-card deck that plays four different games depending on how you deal it",
+    "subhead": "One box, four rulebooks, no expansions ever.",
+    "publicStatus": "prototype",
+    "target": {
+      "currency": "EUR",
+      "amountMinorUnits": 1800000
+    },
+    "durationDays": 30,
+    "channels": ["crowdfunding-page", "short-video", "newsletter", "forum-posts"]
+  },
+  "offering": {
+    "stage": "second playtest build",
+    "stageStatus": "feature-complete",
+    "capabilities": [
+      {
+        "id": "four-rulesets",
+        "summary": "The same 54 cards support four complete rulesets, printed as four separate saddle-stitched booklets.",
+        "demonstrable": true
+      },
+      {
+        "id": "solo-mode",
+        "summary": "One of the four rulesets is a solo scenario ladder with twelve fixed layouts.",
+        "demonstrable": true
+      },
+      {
+        "id": "colourblind-safe-suits",
+        "summary": "Suits are distinguished by shape and edge notch as well as colour, so the deck reads without colour discrimination.",
+        "demonstrable": true
+      },
+      {
+        "id": "table-teach",
+        "summary": "Each booklet opens with a one-page teach spread that gets a new table playing without reading the rest.",
+        "demonstrable": true
+      }
+    ],
+    "roadmap": [
+      {
+        "id": "linen-finish",
+        "summary": "Linen card finish, contingent on the second stretch band."
+      },
+      {
+        "id": "fifth-ruleset",
+        "summary": "A fifth ruleset as a free download after fulfilment, if playtesting supports it."
+      }
+    ]
+  },
+  "tiers": [
+    {
+      "id": "print-and-play",
+      "label": "Print and Play",
+      "priceMinorUnits": 900,
+      "includes": ["Four rulebooks as PDF", "Card sheets sized for A4 and US Letter"],
+      "limit": null,
+      "fulfilment": {
+        "kind": "digital",
+        "estimateWeeksAfterClose": 1,
+        "shipsInternationally": true
+      }
+    },
+    {
+      "id": "single-deck",
+      "label": "One Deck",
+      "priceMinorUnits": 3200,
+      "includes": ["One Lumen Deck box", "Four printed rulebooks", "Print-and-play files"],
+      "limit": null,
+      "fulfilment": {
+        "kind": "physical",
+        "estimateWeeksAfterClose": 26,
+        "shipsInternationally": true
+      }
+    },
+    {
+      "id": "two-deck-table",
+      "label": "Table of Two",
+      "priceMinorUnits": 5800,
+      "includes": ["Two Lumen Deck boxes", "Eight printed rulebooks", "Print-and-play files"],
+      "limit": null,
+      "fulfilment": {
+        "kind": "physical",
+        "estimateWeeksAfterClose": 26,
+        "shipsInternationally": true
+      }
+    },
+    {
+      "id": "playtest-credit",
+      "label": "Playtest Credit",
+      "priceMinorUnits": 9500,
+      "includes": [
+        "One Lumen Deck box",
+        "Name in the playtester list inside every booklet",
+        "Access to the pre-fulfilment rules forum"
+      ],
+      "limit": 120,
+      "fulfilment": {
+        "kind": "mixed",
+        "estimateWeeksAfterClose": 26,
+        "shipsInternationally": true
+      }
+    }
+  ],
+  "budget": {
+    "currency": "EUR",
+    "platformFeeRate": 0.05,
+    "paymentFeeRate": 0.032,
+    "fulfilmentReservePct": 0.62,
+    "allocations": [
+      { "id": "manufacturing", "label": "Printing and boxing", "sharePct": 0.44 },
+      { "id": "shipping", "label": "Freight and per-order postage", "sharePct": 0.18 },
+      { "id": "illustration", "label": "Commissioned card art", "sharePct": 0.16 },
+      { "id": "editing", "label": "Rules editing and proofing", "sharePct": 0.08 },
+      { "id": "contingency", "label": "Contingency", "sharePct": 0.14 }
+    ]
+  },
+  "attribution": {
+    "treatment": "team-only",
+    "prohibitions": [
+      "Do not describe the studio as award-winning; it has not entered any award.",
+      "Do not name any playtester without their written note in sources/permissions/.",
+      "Do not imply a retail distribution deal exists."
+    ],
+    "toolDisclosure": {
+      "required": true,
+      "location": "Credits panel at the foot of the funding page and the last page of each rulebook."
+    }
+  },
+  "publication": {
+    "mode": "internal-review",
+    "postingAuthorized": false,
+    "publicLaunchAuthorized": false,
+    "ledgers": {
+      "claims": "07_governance/claims-ledger.json",
+      "rights": "07_governance/rights-ledger.json"
+    },
+    "blockers": [
+      "Card art licence scope does not yet cover paid advertising.",
+      "The 'four games' phrasing needs a claim row with a written ruleset count check.",
+      "Freight quote is verbal; no written quote archived under sources/."
+    ]
+  }
+}
