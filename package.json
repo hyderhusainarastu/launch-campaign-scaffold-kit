@@ -1,0 +1,10 @@
+{
+  "name": "launch-campaign-scaffold-kit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Folder scaffold and default-deny governance for launches, with dependency-free Node validation tools.",
+  "type": "module",
+  "scripts": { "test": "node tests/run.mjs" },
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}

@@ -1,0 +1,7 @@
+{
+  "manifestVersion": "1.0",
+  "revision": "r1",
+  "campaign": { "slug": "broken-example", "displayName": "Broken Example", "publicStatus": "magic" },
+  "tiers": [ { "id": "t1" } ],
+  "publication": { "mode": "internal-review", "publicLaunchAuthorized": true, "blockers": ["unresolved claim"] }
+}

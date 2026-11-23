@@ -2,6 +2,8 @@
 
 A directory scaffold and a small governance system for running a product, crowdfunding, or marketing launch without accidentally publishing something you cannot back up.
 
+**Contents:** [The problem](#the-problem) · [Quick start](#quick-start) · [The scaffold](#the-scaffold) · [The manifest](#the-manifest) · [Default-deny ledgers](#default-deny-ledgers) · [The crosswalk](#the-crosswalk) · [Tools](#tools) · [Example](#example) · [Use from an AI coding agent](#use-from-an-ai-coding-agent) · [Companion](#companion) · [Limitations](#limitations) · [Related](#related) · [License](#license)
+
 ## The problem
 
 Campaign folders rot in a predictable way. You start with a plan document. Assets accumulate in whatever folder was open at the time. Copy gets written in three places and drifts. Someone drops a stock photo into the video and nobody writes down which licence it came under. A number that was true in an early draft — a playtest count, a ship date, a benchmark — survives into the final page after the thing it described has changed.
@@ -187,9 +189,13 @@ The ledger rows are written to show the failure modes worth recognising rather t
 
 Every name, number, price, and licence filename in that folder is invented.
 
+## Use from an AI coding agent
+
+Paste [PROMPT.md](PROMPT.md) into ChatGPT, Claude.ai, Gemini or a local model to fill the templates for your launch. Coding agents that read `AGENTS.md` (Codex, Cursor, Claude Code, Gemini CLI, Copilot) get the rule that the claims and rights ledgers are default-deny gates: no launch copy is drafted from a claim or asset whose row is not `cleared`. `npm test` runs the validator offline.
+
 ## Companion
 
-Publication review — the checklist you run over an asset before you touch its ledger row, and how to disclose synthetic or generated content — is deliberately out of scope here. That material lives in the **pre-publication-review-gate-checklist** repo, which pairs with this one: the ledgers in this kit are where a review's result gets recorded.
+Publication review — the checklist you run over an asset before you touch its ledger row, and how to disclose synthetic or generated content — is deliberately out of scope here. That material lives in [pre-publication-review-gate-checklist](https://github.com/hyderhusainarastu/pre-publication-review-gate-checklist), which pairs with this one: the ledgers in this kit are where a review's result gets recorded.
 
 ## Limitations
 
@@ -202,6 +208,17 @@ Publication review — the checklist you run over an asset before you touch its 
 - **The folder numbering is opinionated.** Stages are numbered `01`–`08` in a rough chronological order that suits a campaign with brand work, social, a long-form artefact, a funding page, and physical fulfilment. A software launch or a pure content launch will want to rename or drop several. Edit `make-scaffold.sh`; the tools do not care about folder names.
 - **Currency handling is minimal.** Amounts are integers in minor units with a three-letter code. There is no conversion, no locale formatting, and no handling of currencies without minor units.
 
-## Licence
+## Related
 
-CC BY 4.0. See [LICENSE](LICENSE).
+- [pre-publication-review-gate-checklist](https://github.com/hyderhusainarastu/pre-publication-review-gate-checklist): review gate to run before a ledger row is cleared.
+- [incident-runbook-template](https://github.com/hyderhusainarastu/incident-runbook-template): runbook for the operations folder.
+- [palimnote-templates](https://github.com/hyderhusainarastu/palimnote-templates): the catalog of copy-and-fill templates.
+
+## License
+
+The repository is split:
+
+- Root [LICENSE](LICENSE): MIT. Covers `tools/`, `tests/` and `make-scaffold.sh`.
+- [templates/LICENSE](templates/LICENSE): CC BY 4.0 legal code. Covers the files in `templates/`, the schema and the worked example. Copyright (c) 2026 hyderhusainarastu; credit the author when you reuse them.
+
+Part of palimnote-templates - more at https://github.com/hyderhusainarastu
